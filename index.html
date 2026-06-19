@@ -1210,33 +1210,85 @@ document.querySelectorAll('textarea').forEach(ta => {
   ta.addEventListener('input', updateProgress);
 });
 
-function submitForm() {
-  const d = t[currentLang];
+async function submitForm() {
   const required = [
-    { el: document.querySelector('textarea[name="soledad"]'), name: 'soledad' },
-    { el: document.querySelector('textarea[name="autodesc"]'), name: 'autodesc' },
-    { el: document.querySelector('textarea[name="derecho"]'), name: 'derecho' },
-    { el: document.querySelector('textarea[name="capas"]'), name: 'capas' },
+    { el: document.querySelector('textarea[name="soledad"]') },
+    { el: document.querySelector('textarea[name="autodesc"]') },
+    { el: document.querySelector('textarea[name="derecho"]') },
+    { el: document.querySelector('textarea[name="capas"]') },
   ];
 
   let missing = false;
+  let firstMissing = null;
   required.forEach(f => {
     if (!f.el || f.el.value.trim().length < 5) {
       missing = true;
       if (f.el) {
         f.el.style.borderColor = '#D4537E';
-        f.el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (!firstMissing) firstMissing = f.el;
       }
     } else {
-      f.el.style.borderColor = '';
+      if (f.el) f.el.style.borderColor = '';
     }
   });
 
-  if (missing) return;
+  if (missing) {
+    if (firstMissing) firstMissing.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
 
-  document.getElementById('form-body').style.display = 'none';
-  document.getElementById('success').style.display = 'block';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.style.opacity = '0.6';
+  btn.textContent = '...';
+
+  const data = {
+    _language: currentLang,
+    identidad_genero: document.getElementById('gender').value,
+    orientacion_sexual: document.getElementById('sexuality').value,
+    edad: document.getElementById('age').value,
+    pais: document.getElementById('country').value,
+    contacto: document.querySelector('input[name="contact"]:checked')?.value || '',
+    email: document.getElementById('email').value || '',
+    soledad_y_comunidad: document.querySelector('textarea[name="soledad"]').value,
+    autodescubrimiento: document.querySelector('textarea[name="autodesc"]').value,
+    familia_elegida_checkboxes: Array.from(document.querySelectorAll('input[name="familia"]:checked')).map(c => c.value).join(', '),
+    familia_elegida_texto: document.querySelector('textarea[name="familia-texto"]').value,
+    derecho_significativo: document.querySelector('textarea[name="derecho"]').value,
+    proceso_de_lucha: document.querySelector('textarea[name="lucha"]').value,
+    aliados: document.querySelector('textarea[name="aliados"]').value,
+    interseccionalidad_checkboxes: Array.from(document.querySelectorAll('input[name="intersec"]:checked')).map(c => c.value).join(', '),
+    capas_identidad: document.querySelector('textarea[name="capas"]').value,
+    ejemplo_cotidiano: document.querySelector('textarea[name="ejemplo"]').value,
+    odio_origen_checkboxes: Array.from(document.querySelectorAll('input[name="odio"]:checked')).map(c => c.value).join(', '),
+    resiliencia: document.querySelector('textarea[name="resiliencia"]').value,
+    sexualidad_e_identidad: document.querySelector('textarea[name="sexualidad-identidad"]').value,
+    reflexion_final: document.querySelector('textarea[name="extra"]').value,
+  };
+
+  try {
+    const res = await fetch('https://formspree.io/f/mjgdqzlv', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+    if (res.ok) {
+      document.getElementById('form-body').style.display = 'none';
+      document.getElementById('success').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      btn.textContent = t[currentLang].submitBtn;
+      alert('Hubo un error al enviar. Por favor intentá de nuevo.');
+    }
+  } catch (err) {
+    btn.disabled = false;
+    btn.style.opacity = '1';
+    btn.textContent = t[currentLang].submitBtn;
+    alert('Error de conexión. Verificá tu internet e intentá de nuevo.');
+  }
 }
 
 applyTranslations('es');
