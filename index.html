@@ -1270,23 +1270,17 @@ async function submitForm() {
     const formData = new FormData();
     Object.keys(data).forEach(key => formData.append(key, data[key]));
 
-    const res = await fetch('https://formspree.io/f/mzdlpeon', {
+    await fetch('https://script.google.com/macros/s/AKfycbwehLCfB2hhkde7OMfN4GM5qChY45hqlx9yP7GPqLFB7sCim4P7gH5yp_f-Iasns9y-xA/exec', {
       method: 'POST',
-      headers: { 'Accept': 'application/json' },
+      mode: 'no-cors',
       body: formData
     });
 
-    if (res.ok) {
-      document.getElementById('form-body').style.display = 'none';
-      document.getElementById('success').style.display = 'block';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      console.error('Formspree respondió con status:', res.status, await res.text());
-      btn.disabled = false;
-      btn.style.opacity = '1';
-      btn.textContent = t[currentLang].submitBtn;
-      alert('Hubo un error al enviar (código ' + res.status + '). Por favor intentá de nuevo o avisá al equipo.');
-    }
+    // Con 'no-cors' el navegador no nos deja leer la respuesta del servidor,
+    // así que asumimos éxito si el fetch no lanzó una excepción de red.
+    document.getElementById('form-body').style.display = 'none';
+    document.getElementById('success').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   } catch (err) {
     console.error('Error de red:', err);
     btn.disabled = false;
