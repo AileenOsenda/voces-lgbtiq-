@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voces LGBTIQ+ | LGBTIQ+ Voices | Vozes LGBTIQ+ | Voix LGBTIQ+ | Voci LGBTIQ+</title>
+<style>
+  :root {
+    --purple-50: #EEEDFE;
+    --purple-100: #CECBF6;
+    --purple-400: #7F77DD;
+    --purple-600: #534AB7;
+    --purple-800: #3C3489;
+    --teal-50: #E1F5EE;
+    --teal-400: #1D9E75;
+    --teal-600: #0F6E56;
+    --pink-50: #FBEAF0;
+    --pink-400: #D4537E;
+    --pink-600: #993556;
+    --gray-100: #D3D1C7;
+    --gray-400: #888780;
+    --gray-600: #5F5E5A;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #f4f2fb;
+    color: #1a1a2e;
+    min-height: 100vh;
+    line-height: 1.7;
+  }
+
+  .hero {
+    background: var(--purple-600);
+    color: #fff;
+    padding: 3rem 1.5rem 2rem;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+
+  .hero p {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    max-width: 600px;
+    margin: 0 auto 1.5rem;
+  }
+
+  .lang-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 1rem;
+  }
+
+  .lang-btn {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .lang-btn:hover, .lang-btn.active {
+    background: rgba(255,255,255,0.35);
+  }
+
+  .container {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 2rem 1rem 4rem;
+  }
+
+  .notice {
+    background: var(--teal-50);
+    border-left: 4px solid var(--teal-400);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.25rem;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    color: var(--teal-600);
+  }
+
+  .section-card {
+    background: #fff;
+    border: 1px solid #e2e0f0;
+    border-radius: 14px;
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-label {
+    display: inline-block;
+    background: var(--purple-50);
+    color: var(--purple-800);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 999px;
+    margin-bottom: 0.6rem;
+  }
+
+  .section-card h2 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #2a2050;
+    margin-bottom: 0.35rem;
+  }
+
+  .section-desc {
+    font-size: 0.85rem;
+    color: var(--gray-600);
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid #f0eeff;
+    padding-bottom: 1rem;
+  }
+
+  .field-group {
+    margin-bottom: 1.25rem;
+  }
+
+  label.field-label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #2a2050;
+    margin-bottom: 0.45rem;
+  }
+
+  .optional-tag {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--gray-400);
+    margin-left: 6px;
+  }
+
+  input[type="text"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #d5d0ee;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    color: #1a1a2e;
+    background: #fafaf9;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    appearance: none;
+  }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+  }
+
+  input[type="text"]:focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--purple-400);
+    box-shadow: 0 0 0 3px rgba(127,119,221,0.15);
+    background: #fff;
+  }
+
+  textarea {
+    min-height: 110px;
+    resize: vertical;
+  }
+
+  .hint {
+    font-size: 0.78rem;
+    color: var(--gray-400);
+    margin-top: 0.4rem;
+    font-style: italic;
+  }
+
+  .checkboxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 8px;
+    margin-top: 6px;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.88rem;
+    cursor: pointer;
+    padding: 6px 10px;
+    border: 1px solid #e2e0f0;
+    border-radius: 8px;
+    transition: background 0.1s, border-color 0.1s;
+    user-select: none;
+  }
+
+  .check-item:hover { background: var(--purple-50); border-color: var(--purple-100); }
+
+  .check-item input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--purple-600);
+    flex-shrink: 0;
+  }
+
+  .radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+  }
+
+  .radio-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.88rem;
+    cursor: pointer;
+    padding: 6px 14px;
+    border: 1px solid #e2e0f0;
+    border-radius: 999px;
+    transition: background 0.1s, border-color 0.1s;
+    user-select: none;
+  }
+
+  .radio-item:hover { background: var(--purple-50); border-color: var(--purple-100); }
+
+  .radio-item input[type="radio"] {
+    accent-color: var(--purple-600);
+  }
+
+  .submit-area {
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  .submit-btn {
+    background: var(--purple-600);
+    color: #fff;
+    border: none;
+    padding: 14px 48px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    letter-spacing: 0.01em;
+  }
+
+  .submit-btn:hover { background: var(--purple-800); }
+  .submit-btn:active { transform: scale(0.98); }
+
+  .submit-note {
+    font-size: 0.8rem;
+    color: var(--gray-400);
+    margin-top: 0.75rem;
+  }
+
+  .success-screen {
+    display: none;
+    text-align: center;
+    padding: 3rem 1.5rem;
+  }
+
+  .success-icon {
+    width: 64px;
+    height: 64px;
+    background: var(--teal-50);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2rem;
+  }
+
+  .progress-bar {
+    height: 4px;
+    background: #e2e0f0;
+    border-radius: 999px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--purple-600);
+    border-radius: 999px;
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+
+  .divider {
+    height: 1px;
+    background: #f0eeff;
+    margin: 1rem 0;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  @media (max-width: 520px) {
+    .two-col { grid-template-columns: 1fr; }
+    .checkboxes { grid-template-columns: 1fr; }
+    .hero { padding: 2rem 1rem 1.5rem; }
+  }
+
+  [data-lang] { display: none; }
+  [data-lang].visible { display: block; }
+
+  .lang-inline { display: none; }
+  .lang-inline.visible { display: inline; }
+
+  .required-star { color: #D4537E; margin-left: 2px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div id="hero-title">
+    <h1 id="form-title">Voces LGBTIQ+: Nuestras historias, nuestras luchas, nuestra resiliencia</h1>
+    <p id="form-subtitle">Una recolección de testimonios sobre identidad, comunidad y derechos. Tu voz importa. Este formulario es completamente anónimo.</p>
+  </div>
+  <div class="lang-bar">
+    <button class="lang-btn active" onclick="setLang('es')">Español</button>
+    <button class="lang-btn" onclick="setLang('en')">English</button>
+    <button class="lang-btn" onclick="setLang('pt')">Português</button>
+    <button class="lang-btn" onclick="setLang('fr')">Français</button>
+    <button class="lang-btn" onclick="setLang('it')">Italiano</button>
+    <button class="lang-btn" onclick="setLang('de')">Deutsch</button>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+  <div class="notice" id="notice-box">
+    <strong id="notice-title">Tu privacidad importa.</strong>
+    <span id="notice-body"> Este formulario es completamente anónimo. Tus respuestas serán tratadas con respeto, cuidado y confidencialidad. Tiempo estimado: 15–20 minutos.</span>
+  </div>
+
+  <div id="form-body">
+
+    <!-- DEMOGRAFÍA -->
+    <div class="section-card">
+      <span class="section-label" id="label-demo">Datos demográficos</span>
+      <h2 id="h-demo">Cuéntanos un poco sobre vos</h2>
+      <p class="section-desc" id="desc-demo">Toda esta sección es opcional y anónima. Nos ayuda a comprender la diversidad de experiencias.</p>
+
+      <div class="two-col">
+        <div class="field-group">
+          <label class="field-label" id="lbl-gender">Identidad de género <span class="optional-tag" id="opt1">(opcional)</span></label>
+          <select id="gender">
+            <option value="" id="sel-choose">Seleccioná una opción...</option>
+            <option id="g1">Hombre cisgénero</option>
+            <option id="g2">Mujer cisgénero</option>
+            <option id="g3">Hombre trans</option>
+            <option id="g4">Mujer trans</option>
+            <option id="g5">No binario/a</option>
+            <option id="g6">Género fluido</option>
+            <option id="g7">Intersex</option>
+            <option id="g8">Agénero</option>
+            <option id="g9">Prefiero describirlo</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label class="field-label" id="lbl-sex">Orientación sexual <span class="optional-tag">(opcional)</span></label>
+          <select id="sexuality">
+            <option value="" id="sel-choose2">Seleccioná una opción...</option>
+            <option id="s1">Gay</option>
+            <option id="s2">Lesbiana</option>
+            <option id="s3">Bisexual</option>
+            <option id="s4">Pansexual</option>
+            <option id="s5">Asexual</option>
+            <option id="s6">Demisexual</option>
+            <option id="s7">Queer</option>
+            <option id="s8">Prefiero describirla</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="field-group">
+          <label class="field-label" id="lbl-age">Edad <span class="optional-tag">(opcional)</span></label>
+          <select id="age">
+            <option value="" id="sel-age">Seleccioná un rango...</option>
+            <option>18–25</option>
+            <option>26–35</option>
+            <option>36–45</option>
+            <option>46–55</option>
+            <option>56–65</option>
+            <option>66+</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label class="field-label" id="lbl-country">País/región <span class="optional-tag">(opcional)</span></label>
+          <select id="country">
+            <option value="">Seleccioná tu país...</option>
+            <optgroup label="América del Sur">
+              <option>Argentina</option>
+              <option>Bolivia</option>
+              <option>Brasil</option>
+              <option>Chile</option>
+              <option>Colombia</option>
+              <option>Ecuador</option>
+              <option>Paraguay</option>
+              <option>Perú</option>
+              <option>Uruguay</option>
+              <option>Venezuela</option>
+              <option>Guyana</option>
+              <option>Surinam</option>
+            </optgroup>
+            <optgroup label="América Central y Caribe">
+              <option>Costa Rica</option>
+              <option>Cuba</option>
+              <option>El Salvador</option>
+              <option>Guatemala</option>
+              <option>Honduras</option>
+              <option>México</option>
+              <option>Nicaragua</option>
+              <option>Panamá</option>
+              <option>Puerto Rico</option>
+              <option>República Dominicana</option>
+              <option>Haití</option>
+              <option>Jamaica</option>
+              <option>Trinidad y Tobago</option>
+            </optgroup>
+            <optgroup label="América del Norte">
+              <option>Estados Unidos</option>
+              <option>Canadá</option>
+            </optgroup>
+            <optgroup label="Europa">
+              <option>España</option>
+              <option>Portugal</option>
+              <option>Francia</option>
+              <option>Italia</option>
+              <option>Alemania</option>
+              <option>Reino Unido</option>
+              <option>Países Bajos</option>
+              <option>Bélgica</option>
+              <option>Suiza</option>
+              <option>Austria</option>
+              <option>Suecia</option>
+              <option>Noruega</option>
+              <option>Dinamarca</option>
+              <option>Finlandia</option>
+              <option>Polonia</option>
+              <option>Grecia</option>
+              <option>Rumania</option>
+              <option>Hungría</option>
+              <option>República Checa</option>
+              <option>Ucrania</option>
+              <option>Rusia</option>
+            </optgroup>
+            <optgroup label="África">
+              <option>Sudáfrica</option>
+              <option>Nigeria</option>
+              <option>Kenia</option>
+              <option>Ghana</option>
+              <option>Senegal</option>
+              <option>Etiopía</option>
+              <option>Tanzania</option>
+              <option>Uganda</option>
+              <option>Marruecos</option>
+              <option>Túnez</option>
+              <option>Egipto</option>
+            </optgroup>
+            <optgroup label="Asia">
+              <option>India</option>
+              <option>China</option>
+              <option>Japón</option>
+              <option>Corea del Sur</option>
+              <option>Tailandia</option>
+              <option>Filipinas</option>
+              <option>Indonesia</option>
+              <option>Vietnam</option>
+              <option>Pakistán</option>
+              <option>Bangladés</option>
+              <option>Israel</option>
+              <option>Turquía</option>
+              <option>Irán</option>
+            </optgroup>
+            <optgroup label="Oceanía">
+              <option>Australia</option>
+              <option>Nueva Zelanda</option>
+            </optgroup>
+            <option>Otro / Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" id="lbl-contact">¿Querés ser contactado/a para futuros proyectos? <span class="optional-tag">(opcional)</span></label>
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="contact" value="si"> <span id="r-yes">Sí</span></label>
+          <label class="radio-item"><input type="radio" name="contact" value="no"> <span id="r-no">No</span></label>
+          <label class="radio-item"><input type="radio" name="contact" value="anon" checked> <span id="r-anon">Prefiero permanecer anónimo/a</span></label>
+        </div>
+      </div>
+
+      <div class="field-group" id="email-field" style="display:none">
+        <label class="field-label" id="lbl-email">Correo electrónico <span class="optional-tag">(opcional)</span></label>
+        <input type="text" id="email" placeholder="tucorreo@mail.com">
+      </div>
+    </div>
+
+    <!-- SECCIÓN 1 -->
+    <div class="section-card">
+      <span class="section-label" id="label-s1">Sección 1</span>
+      <h2 id="h-s1">Soledad y reconexión comunitaria</h2>
+      <p class="section-desc" id="desc-s1">Cómo la soledad y la comunidad marcan tu experiencia siendo LGBTIQ+.</p>
+
+      <div class="field-group">
+        <label class="field-label" id="q1">¿Cuál es tu experiencia con la soledad siendo LGBTIQ+? ¿Cómo sentís que la comunidad y el orgullo pueden ayudarte a reconectarte con tu identidad y/o sexualidad? <span class="required-star">*</span></label>
+        <textarea name="soledad" placeholder="" id="q1-ph"></textarea>
+        <div class="hint" id="q1-hint">No hay respuestas correctas o incorrectas. Compartí lo que sientas cómodo/a.</div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 2 -->
+    <div class="section-card">
+      <span class="section-label" id="label-s2">Sección 2</span>
+      <h2 id="h-s2">Autodescubrimiento</h2>
+      <p class="section-desc" id="desc-s2">El momento en que "caíste en la cuenta" de que eras parte de esta comunidad.</p>
+
+      <div class="field-group">
+        <label class="field-label" id="q2">¿Cómo fue tu proceso de autodescubrimiento de tu identidad y/o sexualidad? Contanos dónde "te caíste en la cuenta" de que eras parte de esta comunidad. ¿Hay un gesto hacia vos mismo/a, un pensamiento, una conversación o un momento que marque ese instante? <span class="required-star">*</span></label>
+        <textarea name="autodesc"></textarea>
+        <div class="hint" id="q2-hint">Pistas opcionales: un pensamiento que te atravesó · una persona que te ayudó a comprender · un gesto de amor propio · un miedo que superaste · una alegría repentina</div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 3 -->
+    <div class="section-card">
+      <span class="section-label" id="label-s3">Sección 3</span>
+      <h2 id="h-s3">Familia elegida</h2>
+      <p class="section-desc" id="desc-s3">Quiénes te sostienen y cómo contribuyen a tu sentido de pertenencia.</p>
+
+      <div class="field-group">
+        <label class="field-label" id="q3a">¿Quiénes son tu "familia elegida"? Seleccioná todas las que apliquen.</label>
+        <div class="checkboxes">
+          <label class="check-item"><input type="checkbox" name="familia" value="amigos"> <span id="fam1">Amigos/as</span></label>
+          <label class="check-item"><input type="checkbox" name="familia" value="pareja"> <span id="fam2">Pareja/s</span></label>
+          <label class="check-item"><input type="checkbox" name="familia" value="online"> <span id="fam3">Comunidad online</span></label>
+          <label class="check-item"><input type="checkbox" name="familia" value="activistas"> <span id="fam4">Activistas/mentores</span></label>
+          <label class="check-item"><input type="checkbox" name="familia" value="colegas"> <span id="fam5">Colegas</span></label>
+          <label class="check-item"><input type="checkbox" name="familia" value="biologica"> <span id="fam6">Familia biológica</span></label>
+          <label class="check-item"><input type="checkbox" name="familia" value="colectivos"> <span id="fam7">Otros colectivos</span></label>
+          <label class="check-item"><input type="checkbox" name="familia" value="terapia"> <span id="fam8">Grupos de apoyo/terapia</span></label>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" id="q3b">¿Cómo contribuyen a tu bienestar emocional y sentido de pertenencia? ¿Hay alguna brecha o carencia que sientas en ese apoyo? <span class="optional-tag" id="opt-fam">(opcional)</span></label>
+        <textarea name="familia-texto" id="q3b-ph"></textarea>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 4 -->
+    <div class="section-card">
+      <span class="section-label" id="label-s4">Sección 4</span>
+      <h2 id="h-s4">Derechos y luchas</h2>
+      <p class="section-desc" id="desc-s4">Derechos que cambiaron tu vida y el camino colectivo para conquistarlos.</p>
+
+      <div class="field-group">
+        <label class="field-label" id="q4a">¿Hay algún derecho LGBTIQ+, de mujeres o de otra minoría que recuerdes haya sido un cambio significativo en tu vida? <span class="required-star">*</span></label>
+        <textarea name="derecho" id="q4a-ph"></textarea>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="field-group">
+        <label class="field-label" id="q4b">¿Cuál fue el proceso de lucha? <span class="optional-tag" id="opt-lucha">(opcional)</span></label>
+        <textarea name="lucha" id="q4b-ph"></textarea>
+        <div class="hint" id="q4b-hint">Por ejemplo: marchas, diálogos familiares, activismo, decisiones personales, etc.</div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" id="q4c">¿Quiénes estuvieron en esa pelea con vos? <span class="optional-tag" id="opt-quienes">(opcional)</span></label>
+        <textarea name="aliados" id="q4c-ph"></textarea>
+        <div class="hint" id="q4c-hint">Personas, movimientos, organizaciones, colectivos...</div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 5 -->
+    <div class="section-card">
+      <span class="section-label" id="label-s5">Sección 5</span>
+      <h2 id="h-s5">Interseccionalidad</h2>
+      <p class="section-desc" id="desc-s5">Cómo múltiples factores de tu identidad se intersectan y afectan tu manera de vivir tu sexualidad.</p>
+
+      <div class="field-group">
+        <label class="field-label" id="q5a">¿Cuáles de estos factores impactan tu manera de vivir tu sexualidad e identidad? Seleccioná todos los que apliquen.</label>
+        <div class="checkboxes">
+          <label class="check-item"><input type="checkbox" name="intersec" value="pobreza"> <span id="int1">Pobreza / precariedad económica</span></label>
+          <label class="check-item"><input type="checkbox" name="intersec" value="raza"> <span id="int2">Raza / etnia</span></label>
+          <label class="check-item"><input type="checkbox" name="intersec" value="identidad"> <span id="int3">Identidad de género</span></label>
+          <label class="check-item"><input type="checkbox" name="intersec" value="orientacion"> <span id="int4">Orientación sexual</span></label>
+          <label class="check-item"><input type="checkbox" name="intersec" value="pais"> <span id="int5">País de origen / residencia</span></label>
+          <label class="check-item"><input type="checkbox" name="intersec" value="religion"> <span id="int6">Religión / crianza religiosa</span></label>
+          <label class="check-item"><input type="checkbox" name="intersec" value="clase"> <span id="int7">Clase social</span></label>
+          <label class="check-item"><input type="checkbox" name="intersec" value="educacion"> <span id="int8">Educación</span></label>
+          <label class="check-item"><input type="checkbox" name="intersec" value="neuro"> <span id="int9">Capacidad física / neurodivergencia</span></label>
+          <label class="check-item"><input type="checkbox" name="intersec" value="migracion"> <span id="int10">Migración / desplazamiento</span></label>
+          <label class="check-item"><input type="checkbox" name="intersec" value="idioma"> <span id="int11">Idioma / barrera lingüística</span></label>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" id="q5b">Las capas de mi identidad que más impacto tienen son... <span class="required-star">*</span></label>
+        <textarea name="capas"></textarea>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" id="q5c">Un ejemplo concreto de cómo esto afecta mi vida cotidiana es... <span class="optional-tag" id="opt-ej">(opcional)</span></label>
+        <textarea name="ejemplo"></textarea>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 6: MENSAJES DE ODIO -->
+    <div class="section-card">
+      <span class="section-label" id="label-s6">Sección 6</span>
+      <h2 id="h-s6">Mensajes de odio y resiliencia</h2>
+      <p class="section-desc" id="desc-s6">Experiencias de discriminación y los actos de resistencia y superación que nacen de ellas.</p>
+
+      <div class="field-group">
+        <label class="field-label" id="q6a">¿Has experimentado mensajes de odio o discriminación por tu identidad LGBTIQ+? ¿De dónde provenían? Seleccioná todos los que apliquen. <span class="optional-tag" id="opt-odio">(opcional)</span></label>
+        <div class="checkboxes">
+          <label class="check-item"><input type="checkbox" name="odio" value="familia"> <span id="od1">Familia</span></label>
+          <label class="check-item"><input type="checkbox" name="odio" value="escuela"> <span id="od2">Escuela / universidad</span></label>
+          <label class="check-item"><input type="checkbox" name="odio" value="trabajo"> <span id="od3">Trabajo</span></label>
+          <label class="check-item"><input type="checkbox" name="odio" value="publico"> <span id="od4">Espacios públicos</span></label>
+          <label class="check-item"><input type="checkbox" name="odio" value="redes"> <span id="od5">Redes sociales / internet</span></label>
+          <label class="check-item"><input type="checkbox" name="odio" value="religion2"> <span id="od6">Instituciones religiosas</span></label>
+          <label class="check-item"><input type="checkbox" name="odio" value="estado"> <span id="od7">Estado / instituciones</span></label>
+          <label class="check-item"><input type="checkbox" name="odio" value="policia"> <span id="od8">Fuerzas de seguridad</span></label>
+          <label class="check-item"><input type="checkbox" name="odio" value="salud"> <span id="od9">Sistema de salud</span></label>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" id="q6b">¿Cuál fue tu acto más resiliente de resistencia o superación ante esto? <span class="optional-tag" id="opt-resi">(opcional)</span></label>
+        <textarea name="resiliencia"></textarea>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 7: SEXUALIDAD E IDENTIDAD -->
+    <div class="section-card">
+      <span class="section-label" id="label-s7">Sección 7</span>
+      <h2 id="h-s7">Sexualidad e identidad</h2>
+      <p class="section-desc" id="desc-s7">La conexión entre tu sexualidad y tu identidad, y lo que deseás que el mundo entendiera.</p>
+
+      <div class="field-group">
+        <label class="field-label" id="q7">¿Cómo se conecta tu sexualidad con tu identidad de género? ¿Hay algo sobre esta conexión que la sociedad no entienda o que deseás que otros supieran? <span class="optional-tag" id="opt-sex">(opcional)</span></label>
+        <textarea name="sexualidad-identidad"></textarea>
+        <div class="hint" id="q7-hint">Este espacio es tuyo. Podés hablar desde la fluidez, la contradicción, la alegría, el dolor o la complejidad.</div>
+      </div>
+    </div>
+
+    <!-- CIERRE -->
+    <div class="section-card">
+      <span class="section-label" id="label-cierre">Reflexión final</span>
+      <h2 id="h-cierre">¿Hay algo más que quieras compartir?</h2>
+      <p class="section-desc" id="desc-cierre">Tu voz completa nos importa. Este espacio es libre.</p>
+
+      <div class="field-group">
+        <textarea name="extra" id="q-extra-ph"></textarea>
+      </div>
+    </div>
+
+    <div class="submit-area">
+      <button class="submit-btn" onclick="submitForm()" id="submit-btn">Enviar testimonio</button>
+      <p class="submit-note" id="submit-note">Tu respuesta es completamente anónima y no se almacenará ningún dato personal.</p>
+    </div>
+
+  </div>
+
+  <div class="success-screen" id="success">
+    <div class="success-icon">&#10003;</div>
+    <h2 id="success-title" style="font-size:1.4rem; font-weight:600; color:#2a2050; margin-bottom:0.75rem;">¡Gracias por compartir tu historia!</h2>
+    <p id="success-body" style="color:#5F5E5A; max-width:440px; margin:0 auto;">Tu testimonio es un acto de valentía y amor hacia nuestra comunidad. Cada voz construye un mundo más justo y humano. Gracias por ser parte de esto.</p>
+  </div>
+
+</div>
+
+<script>
+const t = {
+  es: {
+    title: "Voces LGBTIQ+: Nuestras historias, nuestras luchas, nuestra resiliencia",
+    subtitle: "Una recolección de testimonios sobre identidad, comunidad y derechos. Tu voz importa. Este formulario es completamente anónimo.",
+    noticeTitle: "Tu privacidad importa.",
+    noticeBody: " Este formulario es completamente anónimo. Tus respuestas serán tratadas con respeto, cuidado y confidencialidad. Tiempo estimado: 15–20 minutos.",
+    labelDemo: "Datos demográficos",
+    hDemo: "Cuéntanos un poco sobre vos",
+    descDemo: "Toda esta sección es opcional y anónima. Nos ayuda a comprender la diversidad de experiencias.",
+    lblGender: "Identidad de género",
+    lblSex: "Orientación sexual",
+    lblAge: "Edad",
+    lblCountry: "País/región",
+    lblContact: "¿Querés ser contactado/a para futuros proyectos?",
+    lblEmail: "Correo electrónico",
+    rYes: "Sí", rNo: "No", rAnon: "Prefiero permanecer anónimo/a",
+    selChoose: "Seleccioná una opción...", selAge: "Seleccioná un rango...",
+    opt: "(opcional)",
+    g: ["Hombre cisgénero","Mujer cisgénero","Hombre trans","Mujer trans","No binario/a","Género fluido","Intersex","Agénero","Prefiero describirlo"],
+    s: ["Gay","Lesbiana","Bisexual","Pansexual","Asexual","Demisexual","Queer","Prefiero describirla"],
+    labelS1: "Sección 1", hS1: "Soledad y reconexión comunitaria",
+    descS1: "Cómo la soledad y la comunidad marcan tu experiencia siendo LGBTIQ+.",
+    q1: "¿Cuál es tu experiencia con la soledad siendo LGBTIQ+? ¿Cómo sentís que la comunidad y el orgullo pueden ayudarte a reconectarte con tu identidad y/o sexualidad?",
+    q1hint: "No hay respuestas correctas o incorrectas. Compartí lo que sientas cómodo/a.",
+    labelS2: "Sección 2", hS2: "Autodescubrimiento",
+    descS2: "El momento en que \"caíste en la cuenta\" de que eras parte de esta comunidad.",
+    q2: "¿Cómo fue tu proceso de autodescubrimiento de tu identidad y/o sexualidad? Contanos dónde \"te caíste en la cuenta\" de que eras parte de esta comunidad. ¿Hay un gesto hacia vos mismo/a, un pensamiento, una conversación o un momento que marque ese instante?",
+    q2hint: "Pistas opcionales: un pensamiento que te atravesó · una persona que te ayudó · un gesto de amor propio · un miedo que superaste · una alegría repentina",
+    labelS3: "Sección 3", hS3: "Familia elegida",
+    descS3: "Quiénes te sostienen y cómo contribuyen a tu sentido de pertenencia.",
+    q3a: "¿Quiénes son tu \"familia elegida\"? Seleccioná todas las que apliquen.",
+    q3b: "¿Cómo contribuyen a tu bienestar emocional? ¿Hay alguna brecha o carencia que sientas en ese apoyo?",
+    optFam: "(opcional)",
+    fam: ["Amigos/as","Pareja/s","Comunidad online","Activistas/mentores","Colegas","Familia biológica","Otros colectivos","Grupos de apoyo/terapia"],
+    labelS4: "Sección 4", hS4: "Derechos y luchas",
+    descS4: "Derechos que cambiaron tu vida y el camino colectivo para conquistarlos.",
+    q4a: "¿Hay algún derecho LGBTIQ+, de mujeres o de otra minoría que recuerdes haya sido un cambio significativo en tu vida?",
+    q4b: "¿Cuál fue el proceso de lucha?", q4bhint: "Por ejemplo: marchas, diálogos familiares, activismo, decisiones personales, etc.",
+    q4c: "¿Quiénes estuvieron en esa pelea con vos?", q4chint: "Personas, movimientos, organizaciones, colectivos...",
+    optLucha: "(opcional)", optQuienes: "(opcional)",
+    labelS5: "Sección 5", hS5: "Interseccionalidad",
+    descS5: "Cómo múltiples factores de tu identidad se intersectan y afectan tu manera de vivir tu sexualidad.",
+    q5a: "¿Cuáles de estos factores impactan tu manera de vivir tu sexualidad e identidad? Seleccioná todos los que apliquen.",
+    q5b: "Las capas de mi identidad que más impacto tienen son...",
+    q5c: "Un ejemplo concreto de cómo esto afecta mi vida cotidiana es...",
+    optEj: "(opcional)",
+    int: ["Pobreza / precariedad económica","Raza / etnia","Identidad de género","Orientación sexual","País de origen / residencia","Religión / crianza religiosa","Clase social","Educación","Capacidad física / neurodivergencia","Migración / desplazamiento","Idioma / barrera lingüística"],
+    labelS6: "Sección 6", hS6: "Mensajes de odio y resiliencia",
+    descS6: "Experiencias de discriminación y los actos de resistencia que nacen de ellas.",
+    q6a: "¿Has experimentado mensajes de odio o discriminación por tu identidad LGBTIQ+? ¿De dónde provenían?",
+    q6b: "¿Cuál fue tu acto más resiliente de resistencia o superación ante esto?",
+    optOdio: "(opcional)", optResi: "(opcional)",
+    od: ["Familia","Escuela / universidad","Trabajo","Espacios públicos","Redes sociales / internet","Instituciones religiosas","Estado / instituciones","Fuerzas de seguridad","Sistema de salud"],
+    labelS7: "Sección 7", hS7: "Sexualidad e identidad",
+    descS7: "La conexión entre tu sexualidad y tu identidad, y lo que deseás que el mundo entendiera.",
+    q7: "¿Cómo se conecta tu sexualidad con tu identidad de género? ¿Hay algo sobre esta conexión que la sociedad no entienda o que deseás que otros supieran?",
+    q7hint: "Este espacio es tuyo. Podés hablar desde la fluidez, la contradicción, la alegría, el dolor o la complejidad.",
+    optSex: "(opcional)",
+    labelCierre: "Reflexión final", hCierre: "¿Hay algo más que quieras compartir?",
+    descCierre: "Tu voz completa nos importa. Este espacio es libre.",
+    submitBtn: "Enviar testimonio",
+    submitNote: "Tu respuesta es completamente anónima y no se almacenará ningún dato personal.",
+    successTitle: "¡Gracias por compartir tu historia!",
+    successBody: "Tu testimonio es un acto de valentía y amor hacia nuestra comunidad. Cada voz construye un mundo más justo y humano. Gracias por ser parte de esto."
+  },
+  en: {
+    title: "LGBTQ+ Voices: Our Stories, Our Struggles, Our Resilience",
+    subtitle: "A collection of testimonies about identity, community and rights. Your voice matters. This form is completely anonymous.",
+    noticeTitle: "Your privacy matters.",
+    noticeBody: " This form is completely anonymous. Your answers will be treated with respect, care and confidentiality. Estimated time: 15–20 minutes.",
+    labelDemo: "Demographics",
+    hDemo: "Tell us a little about yourself",
+    descDemo: "This entire section is optional and anonymous. It helps us understand the diversity of experiences.",
+    lblGender: "Gender identity",
+    lblSex: "Sexual orientation",
+    lblAge: "Age",
+    lblCountry: "Country/region",
+    lblContact: "Would you like to be contacted for future projects?",
+    lblEmail: "Email address",
+    rYes: "Yes", rNo: "No", rAnon: "I prefer to remain anonymous",
+    selChoose: "Select an option...", selAge: "Select a range...",
+    opt: "(optional)",
+    g: ["Cisgender man","Cisgender woman","Trans man","Trans woman","Non-binary","Genderfluid","Intersex","Agender","I prefer to describe it"],
+    s: ["Gay","Lesbian","Bisexual","Pansexual","Asexual","Demisexual","Queer","I prefer to describe it"],
+    labelS1: "Section 1", hS1: "Loneliness and community reconnection",
+    descS1: "How loneliness and community shape your experience as an LGBTQ+ person.",
+    q1: "What is your experience with loneliness as an LGBTQ+ person? How do you feel community and pride can help you reconnect with your identity and/or sexuality?",
+    q1hint: "There are no right or wrong answers. Share whatever you feel comfortable sharing.",
+    labelS2: "Section 2", hS2: "Self-discovery",
+    descS2: "The moment it clicked that you were part of this community.",
+    q2: "How was your process of self-discovery of your identity and/or sexuality? Tell us where it \"clicked\" that you were part of this community. Is there a gesture toward yourself, a thought, a conversation, or a moment that marks that instant?",
+    q2hint: "Optional hints: a thought that struck you · someone who helped you understand · an act of self-love · a fear you overcame · a sudden joy",
+    labelS3: "Section 3", hS3: "Chosen family",
+    descS3: "Who sustains you and how they contribute to your sense of belonging.",
+    q3a: "Who makes up your \"chosen family\"? Select all that apply.",
+    q3b: "How do they contribute to your emotional wellbeing? Is there any gap or unmet need you feel in that support?",
+    optFam: "(optional)",
+    fam: ["Friends","Partner/s","Online community","Activists/mentors","Colleagues","Biological family","Other collectives","Support groups/therapy"],
+    labelS4: "Section 4", hS4: "Rights and struggles",
+    descS4: "Rights that changed your life and the collective path to winning them.",
+    q4a: "Is there an LGBTQ+ right, women's right, or right for another minority that you remember was a significant change in your life?",
+    q4b: "What was the struggle process like?", q4bhint: "For example: marches, family conversations, activism, personal decisions, etc.",
+    q4c: "Who fought alongside you?", q4chint: "People, movements, organizations, collectives...",
+    optLucha: "(optional)", optQuienes: "(optional)",
+    labelS5: "Section 5", hS5: "Intersectionality",
+    descS5: "How multiple aspects of your identity intersect and affect how you live your sexuality.",
+    q5a: "Which of these factors impact how you live your sexuality and identity? Select all that apply.",
+    q5b: "The layers of my identity that have the most impact are...",
+    q5c: "A concrete example of how this affects my daily life is...",
+    optEj: "(optional)",
+    int: ["Poverty / economic precarity","Race / ethnicity","Gender identity","Sexual orientation","Country of origin / residence","Religion / religious upbringing","Social class","Education","Physical ability / neurodivergence","Migration / displacement","Language / language barrier"],
+    labelS6: "Section 6", hS6: "Hate messages and resilience",
+    descS6: "Experiences of discrimination and the acts of resistance that arise from them.",
+    q6a: "Have you experienced hate messages or discrimination because of your LGBTQ+ identity? Where did they come from?",
+    q6b: "What was your most resilient act of resistance or healing?",
+    optOdio: "(optional)", optResi: "(optional)",
+    od: ["Family","School / university","Workplace","Public spaces","Social media / internet","Religious institutions","Government / institutions","Police / security forces","Healthcare system"],
+    labelS7: "Section 7", hS7: "Sexuality and identity",
+    descS7: "The connection between your sexuality and your identity, and what you wish the world understood.",
+    q7: "How does your sexuality connect with your gender identity? Is there something about this connection that society doesn't understand, or that you wish others knew?",
+    q7hint: "This space is yours. You can speak from fluidity, contradiction, joy, pain, or complexity.",
+    optSex: "(optional)",
+    labelCierre: "Final reflection", hCierre: "Is there anything else you'd like to share?",
+    descCierre: "Your full voice matters to us. This is a free space.",
+    submitBtn: "Submit testimony",
+    submitNote: "Your response is completely anonymous and no personal data will be stored.",
+    successTitle: "Thank you for sharing your story!",
+    successBody: "Your testimony is an act of courage and love for our community. Every voice builds a more just and human world. Thank you for being part of this."
+  },
+  pt: {
+    title: "Vozes LGBTIQ+: Nossas Histórias, Nossas Lutas, Nossa Resiliência",
+    subtitle: "Uma coleção de testemunhos sobre identidade, comunidade e direitos. Sua voz importa. Este formulário é completamente anônimo.",
+    noticeTitle: "Sua privacidade importa.",
+    noticeBody: " Este formulário é completamente anônimo. Suas respostas serão tratadas com respeito, cuidado e confidencialidade. Tempo estimado: 15–20 minutos.",
+    labelDemo: "Dados demográficos",
+    hDemo: "Conta um pouco sobre você",
+    descDemo: "Toda esta seção é opcional e anônima. Nos ajuda a compreender a diversidade de experiências.",
+    lblGender: "Identidade de gênero",
+    lblSex: "Orientação sexual",
+    lblAge: "Idade",
+    lblCountry: "País/região",
+    lblContact: "Você gostaria de ser contatado/a para projetos futuros?",
+    lblEmail: "Endereço de e-mail",
+    rYes: "Sim", rNo: "Não", rAnon: "Prefiro permanecer anônimo/a",
+    selChoose: "Selecione uma opção...", selAge: "Selecione um intervalo...",
+    opt: "(opcional)",
+    g: ["Homem cisgênero","Mulher cisgênero","Homem trans","Mulher trans","Não binário/a","Gênero fluido","Intersex","Agênero","Prefiro descrevê-la"],
+    s: ["Gay","Lésbica","Bissexual","Pansexual","Assexual","Demissexual","Queer","Prefiro descrevê-la"],
+    labelS1: "Seção 1", hS1: "Solidão e reconexão comunitária",
+    descS1: "Como a solidão e a comunidade marcam sua experiência sendo LGBTIQ+.",
+    q1: "Qual é a sua experiência com a solidão sendo LGBTIQ+? Como você sente que a comunidade e o orgulho podem te ajudar a se reconectar com sua identidade e/ou sexualidade?",
+    q1hint: "Não há respostas certas ou erradas. Compartilhe o que se sentir confortável.",
+    labelS2: "Seção 2", hS2: "Autodescoberta",
+    descS2: "O momento em que você percebeu que era parte desta comunidade.",
+    q2: "Como foi seu processo de autodescoberta de sua identidade e/ou sexualidade? Conta onde \"caiu a ficha\" de que você era parte desta comunidade. Há um gesto para você mesmo/a, um pensamento, uma conversa ou um momento que marque esse instante?",
+    q2hint: "Dicas opcionais: um pensamento que te atravessou · uma pessoa que te ajudou a entender · um gesto de amor próprio · um medo que você superou · uma alegria repentina",
+    labelS3: "Seção 3", hS3: "Família escolhida",
+    descS3: "Quem te sustenta e como contribuem para seu senso de pertencimento.",
+    q3a: "Quem faz parte da sua \"família escolhida\"? Selecione todas as que se aplicam.",
+    q3b: "Como contribuem para seu bem-estar emocional? Há alguma lacuna ou necessidade não atendida que você sente nesse apoio?",
+    optFam: "(opcional)",
+    fam: ["Amigos/as","Parceiro/a(s)","Comunidade online","Ativistas/mentores","Colegas","Família biológica","Outros coletivos","Grupos de apoio/terapia"],
+    labelS4: "Seção 4", hS4: "Direitos e lutas",
+    descS4: "Direitos que mudaram sua vida e o caminho coletivo para conquistá-los.",
+    q4a: "Há algum direito LGBTIQ+, de mulheres ou de outra minoria que você lembra que foi uma mudança significativa em sua vida?",
+    q4b: "Como foi o processo de luta?", q4bhint: "Por exemplo: marchas, diálogos familiares, ativismo, decisões pessoais, etc.",
+    q4c: "Quem esteve nessa batalha com você?", q4chint: "Pessoas, movimentos, organizações, coletivos...",
+    optLucha: "(opcional)", optQuienes: "(opcional)",
+    labelS5: "Seção 5", hS5: "Interseccionalidade",
+    descS5: "Como múltiplos fatores de sua identidade se intersectam e afetam sua forma de viver sua sexualidade.",
+    q5a: "Quais desses fatores impactam sua forma de viver sua sexualidade e identidade? Selecione todos os que se aplicam.",
+    q5b: "As camadas da minha identidade que mais impactam são...",
+    q5c: "Um exemplo concreto de como isso afeta minha vida cotidiana é...",
+    optEj: "(opcional)",
+    int: ["Pobreza / precariedade econômica","Raça / etnia","Identidade de gênero","Orientação sexual","País de origem / residência","Religião / educação religiosa","Classe social","Educação","Capacidade física / neurodivergência","Migração / deslocamento","Idioma / barreira linguística"],
+    labelS6: "Seção 6", hS6: "Mensagens de ódio e resiliência",
+    descS6: "Experiências de discriminação e os atos de resistência que nascem delas.",
+    q6a: "Você já experimentou mensagens de ódio ou discriminação por sua identidade LGBTIQ+? De onde vieram?",
+    q6b: "Qual foi seu ato mais resiliente de resistência ou superação diante disso?",
+    optOdio: "(opcional)", optResi: "(opcional)",
+    od: ["Família","Escola / universidade","Trabalho","Espaços públicos","Redes sociais / internet","Instituições religiosas","Estado / instituições","Forças de segurança","Sistema de saúde"],
+    labelS7: "Seção 7", hS7: "Sexualidade e identidade",
+    descS7: "A conexão entre sua sexualidade e sua identidade, e o que você deseja que o mundo entendesse.",
+    q7: "Como sua sexualidade se conecta com sua identidade de gênero? Há algo sobre essa conexão que a sociedade não entende ou que você deseja que outros soubessem?",
+    q7hint: "Este espaço é seu. Você pode falar a partir da fluidez, da contradição, da alegria, da dor ou da complexidade.",
+    optSex: "(opcional)",
+    labelCierre: "Reflexão final", hCierre: "Há algo mais que você queira compartilhar?",
+    descCierre: "Sua voz completa nos importa. Este espaço é livre.",
+    submitBtn: "Enviar testemunho",
+    submitNote: "Sua resposta é completamente anônima e nenhum dado pessoal será armazenado.",
+    successTitle: "Obrigado/a por compartilhar sua história!",
+    successBody: "Seu testemunho é um ato de coragem e amor pela nossa comunidade. Cada voz constrói um mundo mais justo e humano. Obrigado/a por fazer parte disso."
+  },
+  fr: {
+    title: "Voix LGBTIQ+ : Nos Histoires, Nos Luttes, Notre Résilience",
+    subtitle: "Une collection de témoignages sur l'identité, la communauté et les droits. Votre voix compte. Ce formulaire est entièrement anonyme.",
+    noticeTitle: "Votre vie privée est importante.",
+    noticeBody: " Ce formulaire est entièrement anonyme. Vos réponses seront traitées avec respect, soin et confidentialité. Temps estimé : 15–20 minutes.",
+    labelDemo: "Données démographiques",
+    hDemo: "Parlez-nous un peu de vous",
+    descDemo: "Cette section est entièrement optionnelle et anonyme. Elle nous aide à comprendre la diversité des expériences.",
+    lblGender: "Identité de genre",
+    lblSex: "Orientation sexuelle",
+    lblAge: "Âge",
+    lblCountry: "Pays/région",
+    lblContact: "Souhaitez-vous être contacté(e) pour de futurs projets ?",
+    lblEmail: "Adresse e-mail",
+    rYes: "Oui", rNo: "Non", rAnon: "Je préfère rester anonyme",
+    selChoose: "Choisissez une option...", selAge: "Choisissez une tranche...",
+    opt: "(optionnel)",
+    g: ["Homme cisgenre","Femme cisgenre","Homme trans","Femme trans","Non-binaire","Fluide dans le genre","Intersexe","Agenre","Je préfère le décrire"],
+    s: ["Gay","Lesbienne","Bisexuel(le)","Pansexuel(le)","Asexuel(le)","Demisexuel(le)","Queer","Je préfère le décrire"],
+    labelS1: "Section 1", hS1: "Solitude et reconnexion communautaire",
+    descS1: "Comment la solitude et la communauté marquent votre expérience en tant que personne LGBTIQ+.",
+    q1: "Quelle est votre expérience de la solitude en tant que personne LGBTIQ+ ? Comment sentez-vous que la communauté et la fierté peuvent vous aider à vous reconnecter avec votre identité et/ou sexualité ?",
+    q1hint: "Il n'y a pas de bonnes ou mauvaises réponses. Partagez ce avec quoi vous vous sentez à l'aise.",
+    labelS2: "Section 2", hS2: "Découverte de soi",
+    descS2: "Le moment où vous avez réalisé que vous faisiez partie de cette communauté.",
+    q2: "Comment s'est passé votre processus de découverte de votre identité et/ou sexualité ? Racontez-nous le moment où vous avez réalisé que vous faisiez partie de cette communauté. Y a-t-il un geste envers vous-même, une pensée, une conversation ou un moment qui marque cet instant ?",
+    q2hint: "Indices optionnels : une pensée qui vous a traversé(e) · quelqu'un qui vous a aidé(e) à comprendre · un geste d'amour propre · une peur que vous avez surmontée · une joie soudaine",
+    labelS3: "Section 3", hS3: "Famille choisie",
+    descS3: "Qui vous soutient et comment ils contribuent à votre sentiment d'appartenance.",
+    q3a: "Qui fait partie de votre \"famille choisie\" ? Sélectionnez tout ce qui s'applique.",
+    q3b: "Comment contribuent-ils à votre bien-être émotionnel ? Y a-t-il un manque que vous ressentez dans ce soutien ?",
+    optFam: "(optionnel)",
+    fam: ["Ami(e)s","Partenaire(s)","Communauté en ligne","Militant(e)s/mentors","Collègues","Famille biologique","Autres collectifs","Groupes de soutien/thérapie"],
+    labelS4: "Section 4", hS4: "Droits et luttes",
+    descS4: "Droits qui ont changé votre vie et le chemin collectif pour les conquérir.",
+    q4a: "Y a-t-il un droit LGBTIQ+, un droit des femmes ou un droit d'une autre minorité dont vous vous souvenez qu'il a été un changement significatif dans votre vie ?",
+    q4b: "Comment s'est passé le processus de lutte ?", q4bhint: "Par exemple : manifestations, dialogues familiaux, activisme, décisions personnelles, etc.",
+    q4c: "Qui était à vos côtés dans cette lutte ?", q4chint: "Personnes, mouvements, organisations, collectifs...",
+    optLucha: "(optionnel)", optQuienes: "(optionnel)",
+    labelS5: "Section 5", hS5: "Intersectionnalité",
+    descS5: "Comment de multiples aspects de votre identité se recoupent et affectent votre façon de vivre votre sexualité.",
+    q5a: "Lesquels de ces facteurs impactent votre façon de vivre votre sexualité et identité ? Sélectionnez tout ce qui s'applique.",
+    q5b: "Les couches de mon identité qui ont le plus d'impact sont...",
+    q5c: "Un exemple concret de la façon dont cela affecte ma vie quotidienne est...",
+    optEj: "(optionnel)",
+    int: ["Pauvreté / précarité économique","Race / ethnicité","Identité de genre","Orientation sexuelle","Pays d'origine / résidence","Religion / éducation religieuse","Classe sociale","Éducation","Capacité physique / neurodivergence","Migration / déplacement","Langue / barrière linguistique"],
+    labelS6: "Section 6", hS6: "Messages de haine et résilience",
+    descS6: "Expériences de discrimination et les actes de résistance qui en naissent.",
+    q6a: "Avez-vous subi des messages de haine ou de la discrimination en raison de votre identité LGBTIQ+ ? D'où venaient-ils ?",
+    q6b: "Quel a été votre acte de résistance ou de dépassement le plus résilient ?",
+    optOdio: "(optionnel)", optResi: "(optionnel)",
+    od: ["Famille","École / université","Travail","Espaces publics","Réseaux sociaux / internet","Institutions religieuses","État / institutions","Forces de l'ordre","Système de santé"],
+    labelS7: "Section 7", hS7: "Sexualité et identité",
+    descS7: "Le lien entre votre sexualité et votre identité, et ce que vous souhaiteriez que le monde comprenne.",
+    q7: "Comment votre sexualité se connecte-t-elle à votre identité de genre ? Y a-t-il quelque chose sur cette connexion que la société ne comprend pas ou que vous souhaiteriez que d'autres sachent ?",
+    q7hint: "Cet espace est le vôtre. Vous pouvez parler de fluidité, de contradiction, de joie, de douleur ou de complexité.",
+    optSex: "(optionnel)",
+    labelCierre: "Réflexion finale", hCierre: "Y a-t-il autre chose que vous souhaitez partager ?",
+    descCierre: "Votre voix complète nous importe. Cet espace est libre.",
+    submitBtn: "Soumettre le témoignage",
+    submitNote: "Votre réponse est entièrement anonyme et aucune donnée personnelle ne sera stockée.",
+    successTitle: "Merci d'avoir partagé votre histoire !",
+    successBody: "Votre témoignage est un acte de courage et d'amour pour notre communauté. Chaque voix construit un monde plus juste et plus humain. Merci de faire partie de cela."
+  },
+  it: {
+    title: "Voci LGBTIQ+: Le Nostre Storie, Le Nostre Lotte, La Nostra Resilienza",
+    subtitle: "Una raccolta di testimonianze su identità, comunità e diritti. La tua voce conta. Questo modulo è completamente anonimo.",
+    noticeTitle: "La tua privacy è importante.",
+    noticeBody: " Questo modulo è completamente anonimo. Le tue risposte saranno trattate con rispetto, cura e riservatezza. Tempo stimato: 15–20 minuti.",
+    labelDemo: "Dati demografici",
+    hDemo: "Raccontaci un po' di te",
+    descDemo: "Questa sezione è completamente opzionale e anonima. Ci aiuta a comprendere la diversità delle esperienze.",
+    lblGender: "Identità di genere",
+    lblSex: "Orientamento sessuale",
+    lblAge: "Età",
+    lblCountry: "Paese/regione",
+    lblContact: "Vorresti essere contattato/a per progetti futuri?",
+    lblEmail: "Indirizzo e-mail",
+    rYes: "Sì", rNo: "No", rAnon: "Preferisco rimanere anonimo/a",
+    selChoose: "Seleziona un'opzione...", selAge: "Seleziona un intervallo...",
+    opt: "(opzionale)",
+    g: ["Uomo cisgender","Donna cisgender","Uomo trans","Donna trans","Non binario/a","Genere fluido","Intersex","Agender","Preferisco descriverlo"],
+    s: ["Gay","Lesbica","Bisessuale","Pansessuale","Asessuale","Demisessuale","Queer","Preferisco descriverlo"],
+    labelS1: "Sezione 1", hS1: "Solitudine e riconnessione comunitaria",
+    descS1: "Come la solitudine e la comunità segnano la tua esperienza come persona LGBTIQ+.",
+    q1: "Qual è la tua esperienza con la solitudine essendo LGBTIQ+? Come senti che la comunità e il pride possono aiutarti a riconnetterti con la tua identità e/o sessualità?",
+    q1hint: "Non ci sono risposte giuste o sbagliate. Condividi ciò con cui ti senti a tuo agio.",
+    labelS2: "Sezione 2", hS2: "Scoperta di sé",
+    descS2: "Il momento in cui hai capito di far parte di questa comunità.",
+    q2: "Com'è stato il tuo processo di scoperta della tua identità e/o sessualità? Raccontaci dove hai capito di far parte di questa comunità. C'è un gesto verso te stesso/a, un pensiero, una conversazione o un momento che segna quell'istante?",
+    q2hint: "Suggerimenti opzionali: un pensiero che ti ha attraversato · qualcuno che ti ha aiutato a capire · un gesto d'amore verso te stesso/a · una paura superata · una gioia improvvisa",
+    labelS3: "Sezione 3", hS3: "Famiglia scelta",
+    descS3: "Chi ti sostiene e come contribuiscono al tuo senso di appartenenza.",
+    q3a: "Chi fa parte della tua \"famiglia scelta\"? Seleziona tutto ciò che si applica.",
+    q3b: "Come contribuiscono al tuo benessere emotivo? C'è qualche lacuna o bisogno insoddisfatto in quel supporto?",
+    optFam: "(opzionale)",
+    fam: ["Amici/amiche","Partner","Comunità online","Attivisti/mentori","Colleghi/colleghe","Famiglia biologica","Altri collettivi","Gruppi di supporto/terapia"],
+    labelS4: "Sezione 4", hS4: "Diritti e lotte",
+    descS4: "Diritti che hanno cambiato la tua vita e il percorso collettivo per conquistarli.",
+    q4a: "C'è un diritto LGBTIQ+, delle donne o di un'altra minoranza che ricordi sia stato un cambiamento significativo nella tua vita?",
+    q4b: "Com'è stato il processo di lotta?", q4bhint: "Per esempio: marce, dialoghi familiari, attivismo, decisioni personali, ecc.",
+    q4c: "Chi era con te in questa battaglia?", q4chint: "Persone, movimenti, organizzazioni, collettivi...",
+    optLucha: "(opzionale)", optQuienes: "(opzionale)",
+    labelS5: "Sezione 5", hS5: "Intersezionalità",
+    descS5: "Come molteplici aspetti della tua identità si intrecciano e influenzano il modo in cui vivi la tua sessualità.",
+    q5a: "Quali di questi fattori impattano il modo in cui vivi la tua sessualità e identità? Seleziona tutto ciò che si applica.",
+    q5b: "Gli strati della mia identità che hanno più impatto sono...",
+    q5c: "Un esempio concreto di come questo influenza la mia vita quotidiana è...",
+    optEj: "(opzionale)",
+    int: ["Povertà / precarietà economica","Razza / etnia","Identità di genere","Orientamento sessuale","Paese d'origine / residenza","Religione / educazione religiosa","Classe sociale","Istruzione","Capacità fisica / neurodivergenza","Migrazione / spostamento","Lingua / barriera linguistica"],
+    labelS6: "Sezione 6", hS6: "Messaggi d'odio e resilienza",
+    descS6: "Esperienze di discriminazione e gli atti di resistenza che ne nascono.",
+    q6a: "Hai sperimentato messaggi d'odio o discriminazione a causa della tua identità LGBTIQ+? Da dove provenivano?",
+    q6b: "Qual è stato il tuo atto più resiliente di resistenza o superamento?",
+    optOdio: "(opzionale)", optResi: "(opzionale)",
+    od: ["Famiglia","Scuola / università","Lavoro","Spazi pubblici","Social media / internet","Istituzioni religiose","Stato / istituzioni","Forze dell'ordine","Sistema sanitario"],
+    labelS7: "Sezione 7", hS7: "Sessualità e identità",
+    descS7: "La connessione tra la tua sessualità e la tua identità, e ciò che vorresti che il mondo capisse.",
+    q7: "Come si connette la tua sessualità con la tua identità di genere? C'è qualcosa in questa connessione che la società non capisce o che vorresti che gli altri sapessero?",
+    q7hint: "Questo spazio è tuo. Puoi parlare di fluidità, contraddizione, gioia, dolore o complessità.",
+    optSex: "(opzionale)",
+    labelCierre: "Riflessione finale", hCierre: "C'è qualcos'altro che vuoi condividere?",
+    descCierre: "La tua voce completa ci importa. Questo spazio è libero.",
+    submitBtn: "Invia testimonianza",
+    submitNote: "La tua risposta è completamente anonima e nessun dato personale verrà archiviato.",
+    successTitle: "Grazie per aver condiviso la tua storia!",
+    successBody: "La tua testimonianza è un atto di coraggio e amore per la nostra comunità. Ogni voce costruisce un mondo più giusto e umano. Grazie per far parte di questo."
+  },
+  de: {
+    title: "LGBTIQ+ Stimmen: Unsere Geschichten, Unsere Kämpfe, Unsere Resilienz",
+    subtitle: "Eine Sammlung von Zeugnissen über Identität, Gemeinschaft und Rechte. Deine Stimme zählt. Dieses Formular ist vollständig anonym.",
+    noticeTitle: "Deine Privatsphäre ist wichtig.",
+    noticeBody: " Dieses Formular ist vollständig anonym. Deine Antworten werden mit Respekt, Sorgfalt und Vertraulichkeit behandelt. Geschätzte Zeit: 15–20 Minuten.",
+    labelDemo: "Demografische Daten",
+    hDemo: "Erzähl uns ein bisschen über dich",
+    descDemo: "Dieser Abschnitt ist vollständig optional und anonym. Er hilft uns, die Vielfalt der Erfahrungen zu verstehen.",
+    lblGender: "Geschlechtsidentität",
+    lblSex: "Sexuelle Orientierung",
+    lblAge: "Alter",
+    lblCountry: "Land/Region",
+    lblContact: "Möchtest du für zukünftige Projekte kontaktiert werden?",
+    lblEmail: "E-Mail-Adresse",
+    rYes: "Ja", rNo: "Nein", rAnon: "Ich bleibe lieber anonym",
+    selChoose: "Option wählen...", selAge: "Bereich wählen...",
+    opt: "(optional)",
+    g: ["Cisgeschlechtlicher Mann","Cisgeschlechtliche Frau","Transmann","Transfrau","Nicht-binär","Genderfluid","Intersex","Agender","Ich beschreibe es lieber selbst"],
+    s: ["Schwul","Lesbisch","Bisexuell","Pansexuell","Asexuell","Demisexuell","Queer","Ich beschreibe es lieber selbst"],
+    labelS1: "Abschnitt 1", hS1: "Einsamkeit und Gemeinschaftswiederverbindung",
+    descS1: "Wie Einsamkeit und Gemeinschaft deine Erfahrung als LGBTIQ+ Person prägen.",
+    q1: "Was ist deine Erfahrung mit Einsamkeit als LGBTIQ+ Person? Wie fühlst du, dass Gemeinschaft und Pride dir helfen können, dich mit deiner Identität und/oder Sexualität wieder zu verbinden?",
+    q1hint: "Es gibt keine richtigen oder falschen Antworten. Teile, womit du dich wohl fühlst.",
+    labelS2: "Abschnitt 2", hS2: "Selbstentdeckung",
+    descS2: "Der Moment, in dem du gemerkt hast, dass du Teil dieser Gemeinschaft bist.",
+    q2: "Wie verlief dein Prozess der Selbstentdeckung deiner Identität und/oder Sexualität? Erzähl uns, wo es für dich 'klick gemacht hat', dass du Teil dieser Gemeinschaft bist. Gibt es eine Geste zu dir selbst, einen Gedanken, ein Gespräch oder einen Moment, der diesen Augenblick markiert?",
+    q2hint: "Optionale Hinweise: ein Gedanke, der dich durchzogen hat · jemand, der dir half zu verstehen · eine Geste der Selbstliebe · eine Angst, die du überwunden hast · eine plötzliche Freude",
+    labelS3: "Abschnitt 3", hS3: "Gewählte Familie",
+    descS3: "Wer dich trägt und wie sie zu deinem Zugehörigkeitsgefühl beitragen.",
+    q3a: "Wer gehört zu deiner \"gewählten Familie\"? Alles zutreffende auswählen.",
+    q3b: "Wie tragen sie zu deinem emotionalen Wohlbefinden bei? Gibt es eine Lücke oder einen unerfüllten Bedarf in dieser Unterstützung?",
+    optFam: "(optional)",
+    fam: ["Freunde","Partner/in(nen)","Online-Gemeinschaft","Aktivist*innen/Mentoren","Kolleg*innen","Biologische Familie","Andere Kollektive","Unterstützungsgruppen/Therapie"],
+    labelS4: "Abschnitt 4", hS4: "Rechte und Kämpfe",
+    descS4: "Rechte, die dein Leben verändert haben, und der kollektive Weg, sie zu erkämpfen.",
+    q4a: "Gibt es ein LGBTIQ+-Recht, ein Frauenrecht oder ein Recht einer anderen Minderheit, an das du dich erinnerst, das eine bedeutende Veränderung in deinem Leben war?",
+    q4b: "Wie verlief der Kampfprozess?", q4bhint: "Zum Beispiel: Demonstrationen, Familiengespräche, Aktivismus, persönliche Entscheidungen, usw.",
+    q4c: "Wer kämpfte an deiner Seite?", q4chint: "Personen, Bewegungen, Organisationen, Kollektive...",
+    optLucha: "(optional)", optQuienes: "(optional)",
+    labelS5: "Abschnitt 5", hS5: "Intersektionalität",
+    descS5: "Wie sich mehrere Aspekte deiner Identität überschneiden und beeinflussen, wie du deine Sexualität lebst.",
+    q5a: "Welche dieser Faktoren beeinflussen, wie du deine Sexualität und Identität lebst? Alles zutreffende auswählen.",
+    q5b: "Die Schichten meiner Identität, die den größten Einfluss haben, sind...",
+    q5c: "Ein konkretes Beispiel, wie dies meinen Alltag beeinflusst, ist...",
+    optEj: "(optional)",
+    int: ["Armut / wirtschaftliche Prekarität","Rasse / Ethnizität","Geschlechtsidentität","Sexuelle Orientierung","Herkunfts-/Aufenthaltsland","Religion / religiöse Erziehung","Soziale Klasse","Bildung","Körperliche Fähigkeit / Neurodivergenz","Migration / Vertreibung","Sprache / Sprachbarriere"],
+    labelS6: "Abschnitt 6", hS6: "Hasscommentare und Resilienz",
+    descS6: "Diskriminierungserfahrungen und die Akte des Widerstands, die daraus entstehen.",
+    q6a: "Hast du Hassnachrichten oder Diskriminierung aufgrund deiner LGBTIQ+-Identität erlebt? Woher kamen sie?",
+    q6b: "Was war dein resilientester Akt des Widerstands oder der Überwindung?",
+    optOdio: "(optional)", optResi: "(optional)",
+    od: ["Familie","Schule / Universität","Arbeit","Öffentliche Räume","Soziale Medien / Internet","Religiöse Institutionen","Staat / Institutionen","Sicherheitskräfte","Gesundheitssystem"],
+    labelS7: "Abschnitt 7", hS7: "Sexualität und Identität",
+    descS7: "Die Verbindung zwischen deiner Sexualität und deiner Identität, und was du dir wünschst, dass die Welt versteht.",
+    q7: "Wie verbindet sich deine Sexualität mit deiner Geschlechtsidentität? Gibt es etwas an dieser Verbindung, das die Gesellschaft nicht versteht oder das du dir wünschst, dass andere wissen?",
+    q7hint: "Dieser Raum gehört dir. Du kannst über Fluidität, Widerspruch, Freude, Schmerz oder Komplexität sprechen.",
+    optSex: "(optional)",
+    labelCierre: "Abschließende Reflexion", hCierre: "Gibt es noch etwas, das du teilen möchtest?",
+    descCierre: "Deine vollständige Stimme ist uns wichtig. Dieser Raum ist frei.",
+    submitBtn: "Zeugnis einreichen",
+    submitNote: "Deine Antwort ist vollständig anonym und es werden keine persönlichen Daten gespeichert.",
+    successTitle: "Danke, dass du deine Geschichte geteilt hast!",
+    successBody: "Dein Zeugnis ist ein Akt des Mutes und der Liebe für unsere Gemeinschaft. Jede Stimme baut eine gerechtere und menschlichere Welt. Danke, dass du ein Teil davon bist."
+  }
+};
+
+let currentLang = 'es';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  applyTranslations(lang);
+}
+
+function applyTranslations(lang) {
+  const d = t[lang];
+  if (!d) return;
+
+  document.getElementById('form-title').textContent = d.title;
+  document.getElementById('form-subtitle').textContent = d.subtitle;
+  document.getElementById('notice-title').textContent = d.noticeTitle;
+  document.getElementById('notice-body').textContent = d.noticeBody;
+
+  document.getElementById('label-demo').textContent = d.labelDemo;
+  document.getElementById('h-demo').textContent = d.hDemo;
+  document.getElementById('desc-demo').textContent = d.descDemo;
+  document.getElementById('lbl-gender').innerHTML = d.lblGender + ' <span class="optional-tag">' + d.opt + '</span>';
+  document.getElementById('lbl-sex').innerHTML = d.lblSex + ' <span class="optional-tag">' + d.opt + '</span>';
+  document.getElementById('lbl-age').innerHTML = d.lblAge + ' <span class="optional-tag">' + d.opt + '</span>';
+  document.getElementById('lbl-country').innerHTML = d.lblCountry + ' <span class="optional-tag">' + d.opt + '</span>';
+  document.getElementById('lbl-contact').textContent = d.lblContact;
+  document.getElementById('lbl-email').innerHTML = d.lblEmail + ' <span class="optional-tag">' + d.opt + '</span>';
+  document.getElementById('r-yes').textContent = d.rYes;
+  document.getElementById('r-no').textContent = d.rNo;
+  document.getElementById('r-anon').textContent = d.rAnon;
+
+  const gSel = document.getElementById('gender');
+  const gOpts = gSel.querySelectorAll('option');
+  gOpts[0].textContent = d.selChoose;
+  d.g.forEach((txt, i) => { if (gOpts[i+1]) gOpts[i+1].textContent = txt; });
+
+  const sSel = document.getElementById('sexuality');
+  const sOpts = sSel.querySelectorAll('option');
+  sOpts[0].textContent = d.selChoose;
+  d.s.forEach((txt, i) => { if (sOpts[i+1]) sOpts[i+1].textContent = txt; });
+
+  document.getElementById('label-s1').textContent = d.labelS1;
+  document.getElementById('h-s1').textContent = d.hS1;
+  document.getElementById('desc-s1').textContent = d.descS1;
+  document.getElementById('q1').innerHTML = d.q1 + ' <span class="required-star">*</span>';
+  document.getElementById('q1-hint').textContent = d.q1hint;
+
+  document.getElementById('label-s2').textContent = d.labelS2;
+  document.getElementById('h-s2').textContent = d.hS2;
+  document.getElementById('desc-s2').textContent = d.descS2;
+  document.getElementById('q2').innerHTML = d.q2 + ' <span class="required-star">*</span>';
+  document.getElementById('q2-hint').textContent = d.q2hint;
+
+  document.getElementById('label-s3').textContent = d.labelS3;
+  document.getElementById('h-s3').textContent = d.hS3;
+  document.getElementById('desc-s3').textContent = d.descS3;
+  document.getElementById('q3a').textContent = d.q3a;
+  document.getElementById('q3b').innerHTML = d.q3b + ' <span class="optional-tag">' + d.optFam + '</span>';
+  const famIds = ['fam1','fam2','fam3','fam4','fam5','fam6','fam7','fam8'];
+  famIds.forEach((id, i) => { const el = document.getElementById(id); if (el && d.fam[i]) el.textContent = d.fam[i]; });
+
+  document.getElementById('label-s4').textContent = d.labelS4;
+  document.getElementById('h-s4').textContent = d.hS4;
+  document.getElementById('desc-s4').textContent = d.descS4;
+  document.getElementById('q4a').innerHTML = d.q4a + ' <span class="required-star">*</span>';
+  document.getElementById('q4b').innerHTML = d.q4b + ' <span class="optional-tag">' + d.optLucha + '</span>';
+  document.getElementById('q4b-hint').textContent = d.q4bhint;
+  document.getElementById('q4c').innerHTML = d.q4c + ' <span class="optional-tag">' + d.optQuienes + '</span>';
+  document.getElementById('q4c-hint').textContent = d.q4chint;
+
+  document.getElementById('label-s5').textContent = d.labelS5;
+  document.getElementById('h-s5').textContent = d.hS5;
+  document.getElementById('desc-s5').textContent = d.descS5;
+  document.getElementById('q5a').textContent = d.q5a;
+  document.getElementById('q5b').innerHTML = d.q5b + ' <span class="required-star">*</span>';
+  document.getElementById('q5c').innerHTML = d.q5c + ' <span class="optional-tag">' + d.optEj + '</span>';
+  const intIds = ['int1','int2','int3','int4','int5','int6','int7','int8','int9','int10','int11'];
+  intIds.forEach((id, i) => { const el = document.getElementById(id); if (el && d.int[i]) el.textContent = d.int[i]; });
+
+  document.getElementById('label-s6').textContent = d.labelS6;
+  document.getElementById('h-s6').textContent = d.hS6;
+  document.getElementById('desc-s6').textContent = d.descS6;
+  document.getElementById('q6a').innerHTML = d.q6a + ' <span class="optional-tag">' + d.optOdio + '</span>';
+  document.getElementById('q6b').innerHTML = d.q6b + ' <span class="optional-tag">' + d.optResi + '</span>';
+  const odIds = ['od1','od2','od3','od4','od5','od6','od7','od8','od9'];
+  odIds.forEach((id, i) => { const el = document.getElementById(id); if (el && d.od[i]) el.textContent = d.od[i]; });
+
+  document.getElementById('label-s7').textContent = d.labelS7;
+  document.getElementById('h-s7').textContent = d.hS7;
+  document.getElementById('desc-s7').textContent = d.descS7;
+  document.getElementById('q7').innerHTML = d.q7 + ' <span class="optional-tag">' + d.optSex + '</span>';
+  document.getElementById('q7-hint').textContent = d.q7hint;
+
+  document.getElementById('label-cierre').textContent = d.labelCierre;
+  document.getElementById('h-cierre').textContent = d.hCierre;
+  document.getElementById('desc-cierre').textContent = d.descCierre;
+  document.getElementById('submit-btn').textContent = d.submitBtn;
+  document.getElementById('submit-note').textContent = d.submitNote;
+  document.getElementById('success-title').textContent = d.successTitle;
+  document.getElementById('success-body').textContent = d.successBody;
+}
+
+document.querySelectorAll('input[name="contact"]').forEach(r => {
+  r.addEventListener('change', function() {
+    document.getElementById('email-field').style.display = this.value === 'si' ? 'block' : 'none';
+  });
+});
+
+function updateProgress() {
+  const textareas = document.querySelectorAll('textarea');
+  let filled = 0;
+  textareas.forEach(ta => { if (ta.value.trim().length > 10) filled++; });
+  const pct = Math.round((filled / textareas.length) * 100);
+  document.getElementById('progress').style.width = pct + '%';
+}
+
+document.querySelectorAll('textarea').forEach(ta => {
+  ta.addEventListener('input', updateProgress);
+});
+
+async function submitForm() {
+  const required = [
+    { el: document.querySelector('textarea[name="soledad"]') },
+    { el: document.querySelector('textarea[name="autodesc"]') },
+    { el: document.querySelector('textarea[name="derecho"]') },
+    { el: document.querySelector('textarea[name="capas"]') },
+  ];
+
+  let missing = false;
+  let firstMissing = null;
+  required.forEach(f => {
+    if (!f.el || f.el.value.trim().length < 5) {
+      missing = true;
+      if (f.el) {
+        f.el.style.borderColor = '#D4537E';
+        if (!firstMissing) firstMissing = f.el;
+      }
+    } else {
+      if (f.el) f.el.style.borderColor = '';
+    }
+  });
+
+  if (missing) {
+    if (firstMissing) firstMissing.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.style.opacity = '0.6';
+  btn.textContent = '...';
+
+  const data = {
+    _language: currentLang,
+    identidad_genero: document.getElementById('gender').value,
+    orientacion_sexual: document.getElementById('sexuality').value,
+    edad: document.getElementById('age').value,
+    pais: document.getElementById('country').value,
+    contacto: document.querySelector('input[name="contact"]:checked')?.value || '',
+    email: document.getElementById('email').value || '',
+    soledad_y_comunidad: document.querySelector('textarea[name="soledad"]').value,
+    autodescubrimiento: document.querySelector('textarea[name="autodesc"]').value,
+    familia_elegida_checkboxes: Array.from(document.querySelectorAll('input[name="familia"]:checked')).map(c => c.value).join(', '),
+    familia_elegida_texto: document.querySelector('textarea[name="familia-texto"]').value,
+    derecho_significativo: document.querySelector('textarea[name="derecho"]').value,
+    proceso_de_lucha: document.querySelector('textarea[name="lucha"]').value,
+    aliados: document.querySelector('textarea[name="aliados"]').value,
+    interseccionalidad_checkboxes: Array.from(document.querySelectorAll('input[name="intersec"]:checked')).map(c => c.value).join(', '),
+    capas_identidad: document.querySelector('textarea[name="capas"]').value,
+    ejemplo_cotidiano: document.querySelector('textarea[name="ejemplo"]').value,
+    odio_origen_checkboxes: Array.from(document.querySelectorAll('input[name="odio"]:checked')).map(c => c.value).join(', '),
+    resiliencia: document.querySelector('textarea[name="resiliencia"]').value,
+    sexualidad_e_identidad: document.querySelector('textarea[name="sexualidad-identidad"]').value,
+    reflexion_final: document.querySelector('textarea[name="extra"]').value,
+  };
+
+  try {
+    const formData = new FormData();
+    Object.keys(data).forEach(key => formData.append(key, data[key]));
+
+    const res = await fetch('https://formspree.io/f/mzdlpeon', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: formData
+    });
+
+    if (res.ok) {
+      document.getElementById('form-body').style.display = 'none';
+      document.getElementById('success').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      console.error('Formspree respondió con status:', res.status, await res.text());
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      btn.textContent = t[currentLang].submitBtn;
+      alert('Hubo un error al enviar (código ' + res.status + '). Por favor intentá de nuevo o avisá al equipo.');
+    }
+  } catch (err) {
+    console.error('Error de red:', err);
+    btn.disabled = false;
+    btn.style.opacity = '1';
+    btn.textContent = t[currentLang].submitBtn;
+    alert('Error de conexión. Verificá tu internet e intentá de nuevo.');
+  }
+}
+
+applyTranslations('es');
+</script>
+</body>
+</html>
